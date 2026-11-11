@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "title": "用户运营数据日报工作台",
+    "sample": true,
+    "sourceNote": "内部日报（已脱敏），仅保留可公开的指标口径与 3 天样例数据",
+    "period": "2026-08-01 至 2026-08-03",
+    "limitations": [
+      "仅包含 3 天样例数据，不能证明长期趋势或统计显著性。",
+      "微信转化数与回复数在样例中相同，可能存在口径重叠，面试前应核实原始定义。",
+      "真实触达话术为按互动行为（关注 / 点赞 / 评论 / 收藏）分层的开场话术；A/B 版本记录按日期分组，未做随机分流、样本量计算与观察周期控制，因此本作品只称观察性复盘，不声称 A/B 实验结论。"
+    ],
+    "experiment": {
+      "design": "A/B 测试设计（观察性复盘）",
+      "segmentation": "按用户互动行为分层：关注 / 点赞 / 评论 / 收藏医生大号",
+      "grouping": "按日期分组：A 版 2 天、B 版 1 天；未随机分流",
+      "primaryMetric": "回复率 = 回复数 / 触达数",
+      "guardrailMetrics": [
+        "微信转化率",
+        "账号异常 / 限流"
+      ],
+      "requiredDesign": "固定素材与入口 → 层内随机分流 → 预设样本量 → 观察 7-14 天",
+      "claimBoundary": "只能提示方向，不能声称因果或显著提升"
+    }
+  },
+  "days": [
+    {
+      "date": "2026-08-01",
+      "totalFans": 118364,
+      "plays": 86900,
+      "newFans": 217,
+      "newComments": 929,
+      "newFollows": 145,
+      "touches": 397,
+      "replies": 25,
+      "directWechat": 19,
+      "organicWechat": 6,
+      "reportedWechatRate": 0.043,
+      "scriptVersion": "A"
+    },
+    {
+      "date": "2026-08-02",
+      "totalFans": 118425,
+      "plays": 141000,
+      "newFans": 204,
+      "newComments": 1188,
+      "newFollows": 168,
+      "touches": 507,
+      "replies": 28,
+      "directWechat": 22,
+      "organicWechat": 6,
+      "reportedWechatRate": 0.055,
+      "scriptVersion": "A"
+    },
+    {
+      "date": "2026-08-03",
+      "totalFans": 118720,
+      "plays": 111900,
+      "newFans": 210,
+      "newComments": 549,
+      "newFollows": 134,
+      "touches": 342,
+      "replies": 26,
+      "directWechat": 24,
+      "organicWechat": 2,
+      "reportedWechatRate": 0.076,
+      "scriptVersion": "B"
+    }
+  ],
+  "scriptVersions": [
+    {
+      "id": "A",
+      "label": "纯介绍版",
+      "dates": [
+        "2026-08-01",
+        "2026-08-02"
+      ],
+      "description": "以账号介绍为主，没有明显的咨询钩子。"
+    },
+    {
+      "id": "B",
+      "label": "免费咨询钩子版",
+      "dates": [
+        "2026-08-03"
+      ],
+      "description": "加入“免费咨询”表达，单日样本为 342 次触达、26 次回复。"
+    }
+  ]
+}

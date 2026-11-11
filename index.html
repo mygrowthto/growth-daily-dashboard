@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="基于用户运营实习日报体系制作的增长数据工作台，展示触达、回复、转化与异常复盘。"
+    />
+    <title>增长日报台 | 用户运营数据工作台</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script type="module" src="./src/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#overview" aria-label="返回增长日报台总览">
+          <span class="brand-mark" aria-hidden="true">G/</span>
+          <span class="brand-copy">
+            <strong>增长日报台</strong>
+            <small>GROWTH OPS</small>
+          </span>
+        </a>
+
+        <nav class="primary-nav" aria-label="页面导航">
+          <a href="#overview" data-nav-link>总览</a>
+          <a href="#funnel" data-nav-link>漏斗</a>
+          <a href="#experiment" data-nav-link>A/B 测试</a>
+          <a href="#details" data-nav-link>日报明细</a>
+          <a href="#method" data-nav-link>口径</a>
+        </nav>
+
+        <div class="header-meta">
+          <span class="sample-chip">
+            <span class="sample-dot" aria-hidden="true"></span>
+            3 天实习样例
+          </span>
+          <span class="desensitized-chip">已脱敏 · 样例数据</span>
+          <a class="header-link" href="#method">数据边界</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="page-intro" id="overview" data-section>
+        <div class="section-inner intro-grid">
+          <div class="intro-copy">
+            <p class="eyebrow">OPERATIONS PULSE · AUG 2026</p>
+            <h1>从曝光到微信转化，<br />今天发生了什么？</h1>
+            <p class="intro-description">
+              把每天的触达、回复和转化放在同一条链路里，先找异常，再决定今天该调整什么。
+            </p>
+          </div>
+
+          <div class="date-control">
+            <div class="date-control-head">
+              <span>查看日期</span>
+              <span id="date-range">2026.08.01 - 08.03</span>
+            </div>
+            <div
+              class="date-switcher"
+              id="date-switcher"
+              role="group"
+              aria-label="选择日报日期"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-band" aria-labelledby="snapshot-heading">
+        <div class="section-inner">
+          <div class="band-heading">
+            <div>
+              <p class="eyebrow">DAILY SNAPSHOT</p>
+              <h2 id="snapshot-heading">当日核心盘面</h2>
+            </div>
+            <p class="band-note" id="snapshot-date">正在读取日期...</p>
+          </div>
+
+          <div class="kpi-grid" id="kpi-grid" aria-live="polite">
+            <article class="kpi-card skeleton-card"></article>
+            <article class="kpi-card skeleton-card"></article>
+            <article class="kpi-card skeleton-card"></article>
+            <article class="kpi-card skeleton-card"></article>
+          </div>
+
+          <div class="signal-banner" id="signal-banner" aria-live="polite">
+            <div>
+              <span class="signal-kicker">当前状态</span>
+              <strong>正在计算日报信号</strong>
+            </div>
+            <span class="status-badge">LOADING</span>
+          </div>
+
+          <div class="overview-grid">
+            <article class="panel trend-panel">
+              <header class="panel-header">
+                <div>
+                  <p class="eyebrow">INDEXED TREND</p>
+                  <h3>流量与承接，是否同步？</h3>
+                </div>
+                <div class="chart-legend" aria-label="趋势图图例">
+                  <span><i class="legend-line play-line"></i>播放指数</span>
+                  <span><i class="legend-line touch-line"></i>触达指数</span>
+                </div>
+              </header>
+              <div
+                class="trend-chart"
+                id="trend-chart"
+              ></div>
+              <p class="panel-footnote">
+                以 8 月 1 日为 100。指数只比较相对变化，绝对值见日报明细。
+              </p>
+            </article>
+
+            <aside class="panel signal-panel" aria-labelledby="signal-heading">
+              <header class="panel-header">
+                <div>
+                  <p class="eyebrow">READOUT</p>
+                  <h3 id="signal-heading">值得先看的变化</h3>
+                </div>
+              </header>
+              <div class="signal-list" id="signal-list"></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-band section-tinted" id="funnel" data-section>
+        <div class="section-inner">
+          <div class="band-heading split-heading">
+            <div>
+              <p class="eyebrow">CONVERSION PATH</p>
+              <h2>触达转化漏斗</h2>
+            </div>
+            <p class="band-note">
+              条宽为对数示意，数字是真实值。重点看相邻环节的损耗，不比较条宽比例。
+            </p>
+          </div>
+
+          <div class="funnel-layout">
+            <article class="panel funnel-panel">
+              <header class="panel-header">
+                <div>
+                  <span class="panel-index">01</span>
+                  <h3 id="funnel-date">当日链路</h3>
+                </div>
+                <span class="unit-label">用户 / 次</span>
+              </header>
+              <div class="funnel-chart" id="funnel-chart"></div>
+            </article>
+
+            <aside class="funnel-notes">
+              <article class="note-block">
+                <span class="note-number">A</span>
+                <div>
+                  <h3>先看回复率</h3>
+                  <p>回复率回答“话术和前段流量是否匹配”，公式是回复数除以触达数。</p>
+                </div>
+              </article>
+              <article class="note-block">
+                <span class="note-number">B</span>
+                <div>
+                  <h3>再看微信转化</h3>
+                  <p>主动与被动微信相加后，再除以触达数。百分比由原始计数计算。</p>
+                </div>
+              </article>
+              <article class="note-block note-warning">
+                <span class="note-number">!</span>
+                <div>
+                  <h3>不要跳过口径</h3>
+                  <p>样例中回复数与微信转化数相同，可能代表口径重叠，面试时应主动说明。</p>
+                </div>
+              </article>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-band" id="experiment" data-section>
+        <div class="section-inner">
+          <div class="band-heading split-heading">
+            <div>
+              <p class="eyebrow">A/B TEST REVIEW</p>
+              <h2>A/B 测试：话术版本怎么比？</h2>
+            </div>
+            <span class="research-label">A/B 测试设计 · 观察性复盘（未随机分组）</span>
+          </div>
+
+          <div class="experiment-design">
+            <div class="design-lead">
+              <p class="eyebrow">TEST DESIGN</p>
+              <h3>从分层话术，到规范的 A/B 测试</h3>
+              <p>
+                真实触达中，开场话术按用户互动行为分层——关注 / 点赞 / 评论 / 收藏医生大号，各用不同的开场。
+                A/B 比较必须发生在<strong>同一分层内</strong>，否则「人群差异」会混进「版本差异」，结论就不可信。
+              </p>
+            </div>
+            <dl class="design-spec">
+              <div><dt>分层维度</dt><dd>互动行为：关注 / 点赞 / 评论 / 收藏</dd></div>
+              <div>
+                <dt>当前分组</dt>
+                <dd>按日期：A 版 2 天、B 版 1 天，<strong>非随机分流</strong></dd>
+              </div>
+              <div><dt>主指标</dt><dd>回复率 = 回复数 / 触达数</dd></div>
+              <div><dt>护栏指标</dt><dd>微信转化率、账号异常 / 限流</dd></div>
+              <div>
+                <dt>规范做法</dt>
+                <dd>固定素材与入口 → 层内随机分流 → 预设样本量 → 观察 7–14 天</dd>
+              </div>
+              <div>
+                <dt>结论边界</dt>
+                <dd>只能提示方向，<strong>不能声称因果或「显著提升」</strong></dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="experiment-grid" id="experiment-grid"></div>
+
+          <div class="readout-strip">
+            <div>
+              <p class="eyebrow">INTERVIEW READOUT</p>
+              <h3>可以说明方向，不能直接说明因果。</h3>
+            </div>
+            <p id="experiment-readout-text">
+              正在计算两版话术的样本量和局限性。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-band section-tinted" id="details" data-section>
+        <div class="section-inner">
+          <div class="band-heading split-heading">
+            <div>
+              <p class="eyebrow">DAILY LEDGER</p>
+              <h2>日报明细</h2>
+            </div>
+            <p class="band-note">
+              原始百分比保留在表中，右侧展示按公式重算后的结果。差异不会被隐藏。
+            </p>
+          </div>
+
+          <div class="table-shell">
+            <div class="table-caption" id="table-caption">正在读取日报...</div>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              aria-label="日报明细表，可横向滚动"
+            >
+              <table>
+                <caption>
+                  2026 年 8 月 1 日至 3 日用户运营日报样例
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">日期</th>
+                    <th scope="col">播放</th>
+                    <th scope="col">触达</th>
+                    <th scope="col">回复</th>
+                    <th scope="col">微信</th>
+                    <th scope="col">原始转化率</th>
+                    <th scope="col">重算转化率</th>
+                    <th scope="col">数据状态</th>
+                  </tr>
+                </thead>
+                <tbody id="daily-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-band" id="method" data-section>
+        <div class="section-inner">
+          <div class="band-heading split-heading">
+            <div>
+              <p class="eyebrow">METHOD & LIMITS</p>
+              <h2>指标口径与边界</h2>
+            </div>
+            <p class="source-note" id="source-note">数据来源：内部日报（已脱敏）</p>
+          </div>
+
+          <div class="method-grid">
+            <article class="method-card">
+              <span class="method-code">01</span>
+              <h3>回复率</h3>
+              <p class="formula">回复数 / 触达数</p>
+              <p>衡量触达后得到反馈的效率，不直接等于加微信效率。</p>
+            </article>
+            <article class="method-card">
+              <span class="method-code">02</span>
+              <h3>微信转化率</h3>
+              <p class="formula">(主动微信 + 被动微信) / 触达数</p>
+              <p>只看原始计数重算，不复制表格里可能不一致的百分比。</p>
+            </article>
+            <article class="method-card">
+              <span class="method-code">03</span>
+              <h3>播放 / 触达指数</h3>
+              <p class="formula">当日值 / 首日值 × 100</p>
+              <p>用于比较两个不同量级指标的变化方向，不能替代绝对值。</p>
+            </article>
+            <article class="method-card">
+              <span class="method-code">04</span>
+              <h3>A/B 测试（观察性）</h3>
+              <p class="formula">Σ回复数 / Σ触达数</p>
+              <p>按实际触达加权；按日期分组不等于随机分流，只能作为方向性复盘。</p>
+            </article>
+          </div>
+
+          <div class="limits-grid">
+            <article class="limits-panel">
+              <header>
+                <p class="eyebrow">LIMITATIONS</p>
+                <h3>这份作品没有证明什么</h3>
+              </header>
+              <ul id="limitations-list"></ul>
+            </article>
+            <article class="next-panel">
+              <header>
+                <p class="eyebrow">NEXT TESTS</p>
+                <h3>后续验证方向</h3>
+              </header>
+              <ol>
+                <li>核对微信转化与回复是否为两个独立口径。</li>
+                <li>补齐至少 7-14 天数据，区分周末、内容主题和渠道变化。</li>
+                <li>在同一互动分层内固定入口与素材，随机分 A/B 组，预设样本量、主指标与护栏指标，观察 7–14 天。</li>
+              </ol>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="section-inner footer-inner">
+        <div>
+          <strong>增长日报台</strong>
+          <p>基于 2026 年用户运营实习日报整理，使用样例数据展示方法，不代表真实企业结论。</p>
+          <p class="disclaimer">
+            <strong>免责声明</strong>：本项目全部代码、数据、文案与图表均已脱敏处理，仅使用 3
+            天样例数据演示分析方法；不含任何公司内部资料、真实账号信息、用户聊天记录或可识别个人信息，
+            也不代表真实企业结论。
+          </p>
+        </div>
+        <a href="#overview">返回顶部</a>
+      </div>
+    </footer>
+
+    <noscript>
+      <div class="noscript-message">
+        页面需要 JavaScript 才能读取 3 天样例数据并计算指标。
+      </div>
+    </noscript>
+  </body>
+</html>
